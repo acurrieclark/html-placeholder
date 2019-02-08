@@ -1,0 +1,49 @@
+{
+  "name": "html-placeholder",
+  "version": "1.0.0",
+  "description": "A basic html placeholder",
+  "author": "Alex Currie-Clark",
+  "license": "MIT",
+  "private": false,
+  "browser": "dist/js/main.js",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.7",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.13.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "light-server": "^2.6.0",
+    "postcss": "^7.0.14",
+    "postcss-clean": "^1.1.0",
+    "prettier": "^1.16.4",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-sass": "^1.1.0",
+    "rollup-plugin-scss": "^1.0.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c --environment BUILD:production; $npm_execpath run images; $npm_execpath run html",
+    "build-dev": "rollup -c --environment BUILD:development; $npm_execpath run images; $npm_execpath run html",
+    "images": "mkdir -p dist/img; find src/img -name \\*.* -exec cp {} dist/img/ \\;",
+    "html": "mkdir -p dist; cp src/index.html dist/index.html",
+    "dev": "$npm_execpath run build-dev; light-server -o -s dist -p 8080 -w \"src/**/*.js # $npm_execpath run build\" -w \"src/**/*.html # $npm_execpath run html\" -w \"src/css/*.scss # $npm_execpath run build # reloadcss\" -w \"src/img/** # $npm_execpath run images \""
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "unsplash-js": "^4.8.0"
+  }
+}
